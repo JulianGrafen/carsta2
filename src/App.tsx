@@ -11,6 +11,7 @@ function App() {
       <Container className="mb-10">
         <Router>
           <Routes>
+            <Route path="*" element={<CreateCustomer />} />
             <Route path="/createcustomer" element={<CreateCustomer />} />
             <Route path="/EditCustomer" element={<EditCustomer />} />
           </Routes>
