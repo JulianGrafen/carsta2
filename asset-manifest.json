@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/JulianGrafen/carsta2/static/css/main.6a936fb9.css",
-    "main.js": "/JulianGrafen/carsta2/static/js/main.d704bd47.js",
-    "static/js/787.bbc95cb8.chunk.js": "/JulianGrafen/carsta2/static/js/787.bbc95cb8.chunk.js",
-    "index.html": "/JulianGrafen/carsta2/index.html",
-    "main.6a936fb9.css.map": "/JulianGrafen/carsta2/static/css/main.6a936fb9.css.map",
-    "main.d704bd47.js.map": "/JulianGrafen/carsta2/static/js/main.d704bd47.js.map",
-    "787.bbc95cb8.chunk.js.map": "/JulianGrafen/carsta2/static/js/787.bbc95cb8.chunk.js.map"
+    "main.css": "/carsta2/static/css/main.6a936fb9.css",
+    "main.js": "/carsta2/static/js/main.1da8eb12.js",
+    "static/js/787.bbc95cb8.chunk.js": "/carsta2/static/js/787.bbc95cb8.chunk.js",
+    "index.html": "/carsta2/index.html",
+    "main.6a936fb9.css.map": "/carsta2/static/css/main.6a936fb9.css.map",
+    "main.1da8eb12.js.map": "/carsta2/static/js/main.1da8eb12.js.map",
+    "787.bbc95cb8.chunk.js.map": "/carsta2/static/js/787.bbc95cb8.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.6a936fb9.css",
-    "static/js/main.d704bd47.js"
+    "static/js/main.1da8eb12.js"
   ]
 }
