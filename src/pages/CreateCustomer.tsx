@@ -7,7 +7,8 @@ export function CreateCustomer() {
   const [kennzeichen, setKennzeichen] = useState("");
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState("Eingeliefert");
-  const [error, setError] = useState("");
+  const [dateOfCreation, setDateOfCreation] = useState(""); // State for date of creation
+  const [artikelnummer, setArtikelnummer] = useState("");
   const [toggleError, setToggleError] = useState(true);
 
   ///TODO: Update function for updating the car status
@@ -22,28 +23,44 @@ export function CreateCustomer() {
     }
   };
 
-  const handleSubmit = (event: any) => {
+  const handleSubmit = async (event: any) => {
     event.preventDefault();
     console.log("Click");
 
     if (toggleError === false) {
-      fetch("http://localhost:3002/customermail", {
+      fetch("http://192.168.2.169:3002/customermail", {
         method: "POST",
         mode: "cors",
 
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ name, kennzeichen, email, status }),
+        body: JSON.stringify({
+          name,
+          kennzeichen,
+          email,
+          status,
+          dateOfCreation,
+        }),
       });
       window.alert("Kunde wurde gespeichert");
-      fetch("http://localhost:3002/createCustomer", {
+
+      setDateOfCreation(new Date().toISOString());
+
+      await fetch("http://192.168.2.169:3002/createcustomer", {
         method: "POST",
         mode: "cors",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ name, kennzeichen, email, status }),
+        body: JSON.stringify({
+          name,
+          kennzeichen,
+          artikelnummer,
+          email,
+          status,
+          dateOfCreation,
+        }),
       });
     } else {
       window.alert("Bitte überprüfen Sie die Angaben.");
@@ -64,7 +81,7 @@ export function CreateCustomer() {
           onChange={(event) => setName(event.target.value)}
         />
         <label className="mt-5 mb-2 font-semibold" htmlFor="Kennzeichen">
-          Kennzeichen:
+          Modell:
         </label>
         <input
           className="border rounded-lg p-2"
@@ -72,6 +89,16 @@ export function CreateCustomer() {
           id="kennzeichen"
           value={kennzeichen}
           onChange={(event) => setKennzeichen(event.target.value)}
+        />
+        <label className="mt-5 mb-2 font-semibold" htmlFor="Artikelnummer">
+          Artikelnummer:{" "}
+        </label>
+        <input
+          className="border rounded-lg p-2"
+          type="text"
+          id="artikelnummer"
+          value={artikelnummer}
+          onChange={(event) => setArtikelnummer(event.target.value)}
         />
         <label className="mt-5 mb-2 font-semibold" htmlFor="email">
           E-Mail:

@@ -1,10 +1,12 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { Navbar } from "../components/navbar";
+import { Link } from "react-router-dom";
 
 interface DataItem {
   name: string;
   kennzeichen: string;
+  artikelnummer: string;
   email: string;
   status: string;
   id: number;
@@ -15,7 +17,7 @@ export function EditCustomer(item: any) {
 
   useEffect(() => {
     //Gets the customer data to display it in the table
-    fetch("http://localhost:3002/createCustomer")
+    fetch("http://192.168.2.169:3002/createcustomer")
       .then((response) => response.json())
       .then((json) => setData(json));
   }, []);
@@ -24,7 +26,7 @@ export function EditCustomer(item: any) {
     window.alert(`Kunde ${itemName} wurde gelöscht.`);
     window.location.reload();
     // Send the request to delete the item with the specified id
-    fetch(`http://localhost:3002/createcustomer/${itemId}`, {
+    fetch(`http://192.168.2.169:3002/createcustomer/${itemId}`, {
       method: "DELETE",
     });
   };
@@ -35,7 +37,7 @@ export function EditCustomer(item: any) {
     console.log("Click");
 
     // Update the data in the database
-    fetch("http://localhost:3002/createCustomer", {
+    fetch("http://192.168.2.169:3002/createcustomer", {
       method: "POST",
       mode: "cors",
 
@@ -47,14 +49,20 @@ export function EditCustomer(item: any) {
 
     // Send the updated data via API
     updatedData.forEach((item: DataItem) => {
-      const { name, kennzeichen, email, status } = item;
-      fetch("http://localhost:3002/customermail", {
+      const { name, kennzeichen, email, status, artikelnummer } = item;
+      fetch("http://192.168.2.169:3002/customermail", {
         method: "POST",
         mode: "cors",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ name, kennzeichen, email, status }),
+        body: JSON.stringify({
+          name,
+          kennzeichen,
+          email,
+          status,
+          artikelnummer,
+        }),
       });
     });
   };
@@ -70,8 +78,11 @@ export function EditCustomer(item: any) {
         <thead>
           <tr className="bg-gray-200 text-xs font-semibold text-gray-700 uppercase tracking-wide">
             <th className="px-4 py-2">Name</th>
-            <th className="px-4 py-2">Kennzeichen</th>
+            <th className="px-4 py-2">Modell</th>
+            <th className="px-4 py-2">Artikelnummer</th>
+
             <th className="px-4 py-2">Status</th>
+
             <th className="px-4 py-2">ID</th>
             <th className="px-4 py-2"></th>
           </tr>
@@ -79,8 +90,12 @@ export function EditCustomer(item: any) {
         <tbody>
           {data.map((item: any) => (
             <tr key={item.id} className="text-xs text-white">
-              <td className="border px-4 py-2">{item.name}</td>
+              <td className="border px-4 py-2">
+                <Link to={`/overviewcustomer/${item.name}`}>{item.name}</Link>{" "}
+              </td>
               <td className="border px-4 py-2">{item.kennzeichen}</td>
+              <td className="border px-4 py-2">{item.artikelnummer}</td>
+
               <td className="border px-4 py-2">
                 <select
                   value={item.status}
